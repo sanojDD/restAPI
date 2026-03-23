@@ -1,8 +1,8 @@
 const Product = require("../models/productModel");
-
+const asyncHandler = require("../middleware/asyncHandler");
 // businesslogic
 
-const getProducts = async (req, res) => {
+const getProducts = asyncHandler(async (req, res) => {
   try {
     const products = await Product.find();
 
@@ -24,9 +24,9 @@ const getProducts = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 
-const createProduct = async (req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
   try {
     const { name, price, description, category, brand, stock, images } =
       req.body;
@@ -81,9 +81,9 @@ const createProduct = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 
-const updateProduct = async (req, res) => {
+const updateProduct = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -124,9 +124,9 @@ const updateProduct = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -162,7 +162,7 @@ const deleteProduct = async (req, res) => {
       error: error.message,
     });
   }
-};
+});
 
 module.exports = {
   getProducts,
