@@ -4,7 +4,7 @@ const asyncHandler = require("../middleware/asyncHandler");
 
 const getProducts = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find({}).populate("user", "name email");
 
     if (!products && products.length == 0) {
       res.json({
@@ -50,6 +50,7 @@ const createProduct = asyncHandler(async (req, res) => {
 
     // 3. Create the product
     const product = await Product.create({
+      user: req.user._id,
       name,
       description,
       price,

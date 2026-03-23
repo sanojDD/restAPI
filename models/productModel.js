@@ -1,7 +1,14 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 const ProductSchema = new Schema(
   {
+    // The "Owner" of the product
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User", // This must match the name you gave your User model
+    },
     name: {
       type: String,
       required: [true, "Please provide a product name"],

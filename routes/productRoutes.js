@@ -16,7 +16,13 @@ const {
 router.get("/products", getProducts);
 
 // 2. Add the 'validate' middleware before the 'createProduct' controller
-router.post("/products", protect, validate(productSchema), createProduct);
+router.post(
+  "/products",
+  protect,
+  admin,
+  validate(productSchema),
+  createProduct,
+);
 
 // 3. You can also use it for updates (though you might want a partial schema later)
 router.put(
